@@ -1,4 +1,4 @@
-#include "scripttimer.h"
+#include "Code_Timer.h"
 #include "stdio.h"
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +6,7 @@ int TestRamSpeed()
 { 
     static const int howmany = 524288;
     float fourgb = (float)howmany * 8192;
-    struct Script_Timer cTimer;
+    struct Code_Timer cTimer;
 
 	printf("#Sizing Buffer To 512KB...\n",howmany);
 	char buffer[howmany];
@@ -17,7 +17,7 @@ int TestRamSpeed()
 	scanf("%*c");
 
 	printf("#Reading Through Buffer For 4GB Worth Of Data...\n");
-	Start_ST(&cTimer);
+	Start_CT(&cTimer);
 	__asm
 	{
 		mov     ecx, 8192
@@ -33,7 +33,7 @@ int TestRamSpeed()
 		dec     ecx
 		jnz     run_again
 	}
-	End_ST(&cTimer);
+	End_CT(&cTimer);
 	
 	printf("[[READ SPEED]]\n");
 	printf("Took: %d seconds \n", cTimer.seconds);
